@@ -1,4 +1,4 @@
-const MediaRow = ({item}) => {
+const MediaRow = ({item, setSelectedItem}) => {
   return (
     <tr>
       <td>
@@ -14,6 +14,12 @@ const MediaRow = ({item}) => {
       <td>{item.description}</td>
 
       <td>{item.media_type}</td>
+
+      <td>
+        <button onClick={() => setSelectedItem(item)}>
+          Show
+        </button>
+      </td>
     </tr>
   );
 };
