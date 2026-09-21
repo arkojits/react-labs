@@ -7,6 +7,7 @@ const useMedia = () => {
   useEffect(() => {
     const getMedia = async () => {
       try {
+        // Local data for now because API needs Metropolia network/VPN
         const media = await fetchData('/test.json');
         setMediaArray(media);
       } catch (error) {
@@ -17,7 +18,57 @@ const useMedia = () => {
     getMedia();
   }, []);
 
-  return {mediaArray};
+  const postMedia = async (fileData, inputs, token) => {
+    const mediaData = {
+      title: inputs.title,
+      description: inputs.description,
+      filename: fileData.filename,
+      media_type: fileData.media_type,
+      filesize: fileData.filesize,
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(mediaData),
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/media',
+      options,
+    );
+  };
+
+  return {
+    mediaArray,
+    postMedia,
+  };
+};
+
+const useFile = () => {
+  const postFile = async (file, token) => {
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      options,
+    );
+  };
+
+  return {postFile};
 };
 
 const useAuthentication = () => {
@@ -74,4 +125,9 @@ const useUser = () => {
   };
 };
 
-export {useMedia, useAuthentication, useUser};
+export {
+  useMedia,
+  useFile,
+  useAuthentication,
+  useUser,
+};

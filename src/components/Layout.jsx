@@ -8,6 +8,7 @@ const Layout = () => {
         <Link to="/profile">Profile</Link>{' '}
         <Link to="/login">Login</Link>{' '}
         <Link to="/logout">Logout</Link>
+        <Link to="/upload">Upload</Link>{' '}
       </nav>
 
       <main>
