@@ -5,19 +5,22 @@ import Login from './views/Login';
 import Logout from './views/Logout';
 import Profile from './views/Profile';
 import Upload from './views/Upload';
+import {UserProvider} from './contexts/UserContext';
 
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/upload" element={<Upload />} />
-        </Route>
-      </Routes>
+      <UserProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/upload" element={<Upload />} />
+          </Route>
+        </Routes>
+      </UserProvider>
     </BrowserRouter>
   );
 };

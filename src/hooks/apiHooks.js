@@ -42,9 +42,41 @@ const useMedia = () => {
     );
   };
 
+  const deleteMedia = async (mediaId, token) => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/media/' + mediaId,
+      options,
+    );
+  };
+
+  const modifyMedia = async (mediaId, data, token) => {
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/media/' + mediaId,
+      options,
+    );
+  };
+
   return {
     mediaArray,
     postMedia,
+    deleteMedia,
+    modifyMedia,
   };
 };
 
@@ -125,9 +157,74 @@ const useUser = () => {
   };
 };
 
+const useLike = () => {
+  const postLike = async (mediaId, token) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        media_id: mediaId,
+      }),
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/likes',
+      options,
+    );
+  };
+
+  const deleteLike = async (likeId, token) => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API + '/likes/' + likeId,
+      options,
+    );
+  };
+
+  const getLikeCountByMediaId = async (mediaId) => {
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API +
+        '/likes/count/' +
+        mediaId,
+    );
+  };
+
+  const getLikeByUser = async (mediaId, token) => {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    return await fetchData(
+      import.meta.env.VITE_MEDIA_API +
+        '/likes/bymedia/user/' +
+        mediaId,
+      options,
+    );
+  };
+
+  return {
+    postLike,
+    deleteLike,
+    getLikeCountByMediaId,
+    getLikeByUser,
+  };
+};
+
 export {
   useMedia,
   useFile,
   useAuthentication,
   useUser,
+  useLike,
 };

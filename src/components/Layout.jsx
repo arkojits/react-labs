@@ -3,12 +3,53 @@ import {Link, Outlet} from 'react-router';
 const Layout = () => {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>{' '}
-        <Link to="/profile">Profile</Link>{' '}
-        <Link to="/login">Login</Link>{' '}
-        <Link to="/logout">Logout</Link>
-        <Link to="/upload">Upload</Link>{' '}
+      <nav className="mb-8 rounded bg-gray-800">
+        <ul className="flex gap-2">
+          <li>
+            <Link
+              className="block px-4 py-3 text-white hover:bg-gray-900"
+              to="/"
+            >
+              Home
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="block px-4 py-3 text-white hover:bg-gray-900"
+              to="/profile"
+            >
+              Profile
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="block px-4 py-3 text-white hover:bg-gray-900"
+              to="/login"
+            >
+              Login
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="block px-4 py-3 text-white hover:bg-gray-900"
+              to="/logout"
+            >
+              Logout
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              className="block px-4 py-3 text-white hover:bg-gray-900"
+              to="/upload"
+            >
+              Upload
+            </Link>
+          </li>
+        </ul>
       </nav>
 
       <main>

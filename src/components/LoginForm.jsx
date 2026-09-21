@@ -1,10 +1,8 @@
-import {useNavigate} from 'react-router';
 import useForm from '../hooks/formHooks';
-import {useAuthentication} from '../hooks/apiHooks';
+import {useUserContext} from '../hooks/contextHooks';
 
 const LoginForm = () => {
-  const navigate = useNavigate();
-  const {postLogin} = useAuthentication();
+  const {handleLogin} = useUserContext();
 
   const initialValues = {
     username: '',
@@ -12,29 +10,32 @@ const LoginForm = () => {
   };
 
   const doLogin = async () => {
-    try {
-      const result = await postLogin(inputs);
-
-      console.log(result);
-
-      localStorage.setItem('token', result.token);
-
-      navigate('/');
-    } catch (error) {
-      alert(error.message);
-    }
+    await handleLogin(inputs);
   };
 
-  const {inputs, handleInputChange, handleSubmit} =
-    useForm(doLogin, initialValues);
+  const {inputs, handleInputChange, handleSubmit} = useForm(
+    doLogin,
+    initialValues,
+  );
 
   return (
-    <>
-      <h1>Login</h1>
+    <div className="mx-auto max-w-md rounded-lg bg-gray-100 p-6 shadow">
+      <h1 className="mb-6 text-2xl font-bold">
+        Login
+      </h1>
 
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4"
+      >
         <div>
-          <label htmlFor="loginuser">Username</label>
+          <label
+            htmlFor="loginuser"
+            className="mb-1 block font-medium"
+          >
+            Username
+          </label>
+
           <input
             id="loginuser"
             name="username"
@@ -42,11 +43,18 @@ const LoginForm = () => {
             value={inputs.username}
             onChange={handleInputChange}
             autoComplete="username"
+            className="w-full rounded border border-gray-300 bg-white p-2 text-black"
           />
         </div>
 
         <div>
-          <label htmlFor="loginpassword">Password</label>
+          <label
+            htmlFor="loginpassword"
+            className="mb-1 block font-medium"
+          >
+            Password
+          </label>
+
           <input
             id="loginpassword"
             name="password"
@@ -54,12 +62,18 @@ const LoginForm = () => {
             value={inputs.password}
             onChange={handleInputChange}
             autoComplete="current-password"
+            className="w-full rounded border border-gray-300 bg-white p-2 text-black"
           />
         </div>
 
-        <button type="submit">Login</button>
+        <button
+          type="submit"
+          className="rounded bg-gray-800 px-4 py-2 text-white hover:bg-gray-900"
+        >
+          Login
+        </button>
       </form>
-    </>
+    </div>
   );
 };
 

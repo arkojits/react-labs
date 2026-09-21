@@ -1,6 +1,7 @@
 [
   {
     "media_id": 1,
+    "user_id": 1,
     "filename": "https://placehold.co/800x600",
     "thumbnail": "https://placehold.co/320x240",
     "media_type": "image/jpeg",
@@ -10,6 +11,7 @@
   },
   {
     "media_id": 2,
+    "user_id": 2,
     "filename": "https://placehold.co/800x600",
     "thumbnail": "https://placehold.co/320x240",
     "media_type": "image/jpeg",
@@ -19,6 +21,7 @@
   },
   {
     "media_id": 3,
+    "user_id": 1,
     "filename": "https://www.w3schools.com/html/mov_bbb.mp4",
     "thumbnail": "https://placehold.co/320x240?text=Video",
     "media_type": "video/mp4",
