@@ -7,8 +7,11 @@ const useMedia = () => {
   useEffect(() => {
     const getMedia = async () => {
       try {
-        // Local data for now because API needs Metropolia network/VPN
-        const media = await fetchData('/test.json');
+        // Get real media from Metropolia Media API
+        const media = await fetchData(
+          import.meta.env.VITE_MEDIA_API + '/media',
+        );
+
         setMediaArray(media);
       } catch (error) {
         console.log(error.message);
